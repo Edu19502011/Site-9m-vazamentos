@@ -14,7 +14,7 @@ const handler = NextAuth({
     }),
   ],
   callbacks: {
-    async session({ session, token, user }) {
+    async session({ session }) {
       // Adicione dados extras à sessão se necessário
       return session;
     },

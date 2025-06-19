@@ -15,7 +15,7 @@ export async function GET() {
     }
     const data = await res.json();
     return NextResponse.json({ members: data.approximate_member_count || 0 });
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: "Erro inesperado." }, { status: 500 });
   }
 } 

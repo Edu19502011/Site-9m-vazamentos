@@ -1,5 +1,5 @@
 "use client";
-import { useSession, signOut, signIn } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
@@ -40,16 +40,16 @@ function ParticlesBG() {
 
 export default function Dashboard() {
   const { t } = useTranslation("common");
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const router = useRouter();
   const [discordMembers, setDiscordMembers] = useState<number | null>(null);
   const [visitas, setVisitas] = useState<number | null>(null);
 
   useEffect(() => {
-    if (status === "unauthenticated") {
+    if (session === null) {
       router.replace("/");
     }
-  }, [status, router]);
+  }, [session, router]);
 
   useEffect(() => {
     fetch("/api/discord/members")
