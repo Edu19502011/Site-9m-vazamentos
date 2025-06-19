@@ -3,6 +3,13 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
+type Lang = "pt" | "en";
+type Comando = {
+  nome: Record<Lang, string>;
+  descricao: Record<Lang, string>;
+  categoria: Record<Lang, string>;
+};
+
 function ParticlesBG() {
   return (
     <div className="absolute inset-0 w-full h-full overflow-hidden z-0 pointer-events-none">
@@ -34,7 +41,7 @@ function ParticlesBG() {
   );
 }
 
-const comandos = [
+const comandos: Comando[] = [
   {
     nome: { pt: "Extrair Mensagens", en: "Extract Messages" },
     descricao: {
@@ -136,7 +143,7 @@ const comandos = [
 export default function Comandos() {
   const { t, i18n } = useTranslation("common");
   const [busca, setBusca] = useState("");
-  const lang = i18n.language || "pt";
+  const lang = (i18n.language as Lang) || "pt";
   const comandosFiltrados = comandos.filter((cmd) =>
     cmd.nome[lang].toLowerCase().includes(busca.toLowerCase()) ||
     cmd.descricao[lang].toLowerCase().includes(busca.toLowerCase())
