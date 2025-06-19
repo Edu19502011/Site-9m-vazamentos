@@ -1,0 +1,21 @@
+{
+  "hero_title": "9M Tools",
+  "hero_subtitle": "9M Vazamentos is the ultimate platform for automation, security, and community management on Brazilian Discord. Discover exclusive tools, advanced analytics, and premium support to take your server to the next level.",
+  "enter_discord": "Join Discord",
+  "see_commands": "Explore Commands",
+  "login_discord": "Sign in with Discord",
+  "login_google": "Sign in with Google",
+  "select_language": "Choose language",
+  "dashboard": "Control Panel",
+  "commands_tools": "Commands & Tools",
+  "search_command": "Search command or tool...",
+  "no_command_found": "No matching command found.",
+  "logout": "Sign Out",
+  "analytics_title": "Analytics Overview",
+  "discord_members": "Discord Members",
+  "leaks_captured": "Leaks Monitored",
+  "site_visits": "Site Visits",
+  "analytics_soon": "(Soon, real-time data and advanced insights!)",
+  "loading": "Loading information...",
+  "user_email": "User e-mail"
+} 
