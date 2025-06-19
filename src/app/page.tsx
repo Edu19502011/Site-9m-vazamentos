@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/navigation";
 import { FaCogs, FaShieldAlt, FaUsers, FaQuoteLeft, FaDiscord, FaInstagram, FaGlobe } from "react-icons/fa";
+import Link from "next/link";
 
 function AnimatedParticlesBG() {
   // Gerar posições e tamanhos fixos para as partículas
@@ -122,14 +123,15 @@ export default function Home() {
             <span className="relative z-10">Discord</span>
             <span className="absolute inset-0 bg-gradient-to-r from-fuchsia-400/30 to-purple-400/30 blur-lg opacity-60 animate-pulse" />
           </motion.a>
-          <motion.button
-            whileHover={{ scale: 1.07, boxShadow: "0 0 40px 10px #a259f7" }}
-            whileTap={{ scale: 0.98 }}
-            className="w-full md:w-auto px-8 py-4 rounded-xl font-bold text-lg bg-white border-2 border-fuchsia-600 text-fuchsia-700 shadow-md hover:bg-fuchsia-50 transition-all text-center"
-            onClick={() => router.push("/dashboard")}
-          >
-            Painel
-          </motion.button>
+          <Link href="/dashboard" passHref legacyBehavior>
+            <motion.a
+              whileHover={{ scale: 1.07, boxShadow: "0 0 40px 10px #a259f7" }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full md:w-auto px-8 py-4 rounded-xl font-bold text-lg bg-white border-2 border-fuchsia-600 text-fuchsia-700 shadow-md hover:bg-fuchsia-50 transition-all text-center flex items-center justify-center"
+            >
+              Painel
+            </motion.a>
+          </Link>
         </motion.div>
         {/* Seção Como funciona */}
         <section className="w-full max-w-3xl mx-auto mt-16 mb-12">
