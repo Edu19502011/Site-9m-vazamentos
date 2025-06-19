@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { FaUserFriends, FaEye, FaLock, FaCopy, FaInfoCircle } from "react-icons/fa";
+import { FaUserFriends, FaEye, FaLock, FaCopy, FaInfoCircle, FaChartLine, FaClock, FaBolt } from "react-icons/fa";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
 
 function ParticlesBG() {
@@ -83,14 +83,20 @@ export default function Dashboard() {
 
   // Exemplo de dados para o gráfico
   const visitasData = [
-    { dia: "Seg", visitas: 120 },
-    { dia: "Ter", visitas: 180 },
-    { dia: "Qua", visitas: 150 },
-    { dia: "Qui", visitas: 200 },
-    { dia: "Sex", visitas: 250 },
-    { dia: "Sáb", visitas: 300 },
-    { dia: "Dom", visitas: 220 },
+    { dia: "Seg", visitas: 120, comandos: 40 },
+    { dia: "Ter", visitas: 180, comandos: 55 },
+    { dia: "Qua", visitas: 150, comandos: 38 },
+    { dia: "Qui", visitas: 200, comandos: 70 },
+    { dia: "Sex", visitas: 250, comandos: 90 },
+    { dia: "Sáb", visitas: 300, comandos: 120 },
+    { dia: "Dom", visitas: 220, comandos: 60 },
   ];
+  // Dados analíticos fictícios
+  const assinantesAtivos = 87;
+  const comandosExecutados = 1240;
+  const uptime = "99.98%";
+  const mediaComandosDia = 62;
+  const picosUsuarios = 150;
 
   // Função para copiar e-mail
   const copyEmail = () => {
@@ -107,23 +113,36 @@ export default function Dashboard() {
         initial={{ opacity: 0, scale: 0.97 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1 }}
-        className="flex flex-col items-center gap-10 z-10 w-full max-w-3xl px-4 py-12"
+        className="flex flex-col items-center gap-10 z-10 w-full max-w-4xl px-4 py-12"
       >
         {/* Mensagem de boas-vindas */}
         <h1 className="text-3xl md:text-4xl font-extrabold text-center bg-gradient-to-r from-white via-fuchsia-400 to-purple-500 bg-clip-text text-transparent drop-shadow-[0_0_40px_#a259f7] animate-pulse select-none mb-2">
           Bem-vindo de volta, {session.user?.name?.split(" ")[0] || "usuário"}!
         </h1>
-        {/* Avatar, nome e e-mail */}
-        <div className="flex flex-col items-center gap-2 bg-black/60 rounded-2xl shadow-2xl p-8 w-full border-2 border-fuchsia-700/30">
-          {session.user?.image && (
-            <img src={session.user.image} alt="Avatar" className="w-24 h-24 rounded-full border-4 border-fuchsia-700 shadow-lg mb-2" />
-          )}
-          <span className="text-2xl font-bold text-white drop-shadow-lg">{session.user?.name}</span>
-          <span className="text-fuchsia-300 font-mono flex items-center gap-2">{t("user_email")}: {session.user?.email}
-            <button onClick={copyEmail} title="Copiar e-mail" className="ml-2 text-fuchsia-400 hover:text-fuchsia-200"><FaCopy /></button>
-          </span>
+        {/* Cards analíticos premium */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+          <motion.div whileHover={{ scale: 1.04 }} className="flex flex-col items-center justify-center bg-gradient-to-br from-fuchsia-900/80 via-purple-900/80 to-blue-900/80 rounded-2xl p-8 shadow-xl border-2 border-fuchsia-700/30">
+            <FaUserFriends className="text-4xl text-fuchsia-400 mb-2" />
+            <span className="text-lg font-bold text-fuchsia-200 mb-1">Assinantes Ativos</span>
+            <span className="text-3xl font-extrabold text-white drop-shadow-lg">{assinantesAtivos}</span>
+          </motion.div>
+          <motion.div whileHover={{ scale: 1.04 }} className="flex flex-col items-center justify-center bg-gradient-to-br from-fuchsia-900/80 via-purple-900/80 to-blue-900/80 rounded-2xl p-8 shadow-xl border-2 border-fuchsia-700/30">
+            <FaBolt className="text-4xl text-fuchsia-400 mb-2" />
+            <span className="text-lg font-bold text-fuchsia-200 mb-1">Comandos Executados</span>
+            <span className="text-3xl font-extrabold text-white drop-shadow-lg">{comandosExecutados}</span>
+          </motion.div>
+          <motion.div whileHover={{ scale: 1.04 }} className="flex flex-col items-center justify-center bg-gradient-to-br from-fuchsia-900/80 via-purple-900/80 to-blue-900/80 rounded-2xl p-8 shadow-xl border-2 border-fuchsia-700/30">
+            <FaChartLine className="text-4xl text-fuchsia-400 mb-2" />
+            <span className="text-lg font-bold text-fuchsia-200 mb-1">Média Comandos/Dia</span>
+            <span className="text-3xl font-extrabold text-white drop-shadow-lg">{mediaComandosDia}</span>
+          </motion.div>
+          <motion.div whileHover={{ scale: 1.04 }} className="flex flex-col items-center justify-center bg-gradient-to-br from-fuchsia-900/80 via-purple-900/80 to-blue-900/80 rounded-2xl p-8 shadow-xl border-2 border-fuchsia-700/30">
+            <FaClock className="text-4xl text-fuchsia-400 mb-2" />
+            <span className="text-lg font-bold text-fuchsia-200 mb-1">Uptime</span>
+            <span className="text-3xl font-extrabold text-white drop-shadow-lg">{uptime}</span>
+          </motion.div>
         </div>
-        {/* Cards de informações */}
+        {/* Cards de informações originais */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
           <motion.div
             whileHover={{ scale: 1.04 }}
@@ -150,26 +169,28 @@ export default function Dashboard() {
             <span className="text-3xl font-extrabold text-white drop-shadow-lg">{visitas === null ? "..." : visitas}</span>
           </motion.div>
         </div>
-        {/* Gráfico animado de visitas */}
+        {/* Gráfico analítico de visitas e comandos */}
         <div className="w-full bg-black/50 rounded-2xl p-6 shadow-xl border-2 border-fuchsia-700/20 mt-4">
-          <h2 className="text-lg font-bold mb-4 text-fuchsia-200 flex items-center gap-2"><FaEye /> Gráfico de visitas (exemplo)</h2>
-          <ResponsiveContainer width="100%" height={220}>
+          <h2 className="text-lg font-bold mb-4 text-fuchsia-200 flex items-center gap-2"><FaChartLine /> Engajamento semanal</h2>
+          <ResponsiveContainer width="100%" height={260}>
             <LineChart data={visitasData} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#a259f7" opacity={0.1} />
               <XAxis dataKey="dia" stroke="#fff" fontSize={14} tickLine={false} axisLine={false} />
               <YAxis stroke="#fff" fontSize={14} tickLine={false} axisLine={false} />
               <Tooltip contentStyle={{ background: '#2d0066', border: 'none', color: '#fff' }} />
-              <Line type="monotone" dataKey="visitas" stroke="#a259f7" strokeWidth={3} dot={{ r: 5, fill: '#fff' }} activeDot={{ r: 8 }} />
+              <Line type="monotone" dataKey="visitas" stroke="#a259f7" strokeWidth={3} dot={{ r: 5, fill: '#fff' }} activeDot={{ r: 8 }} name="Visitas" />
+              <Line type="monotone" dataKey="comandos" stroke="#f59e42" strokeWidth={3} dot={{ r: 5, fill: '#fff' }} activeDot={{ r: 8 }} name="Comandos" />
             </LineChart>
           </ResponsiveContainer>
         </div>
-        {/* Dicas rápidas / novidades */}
+        {/* Seção de novidades e dicas */}
         <div className="w-full bg-gradient-to-r from-fuchsia-800/60 via-purple-800/60 to-blue-800/60 rounded-2xl p-6 shadow-xl border-2 border-fuchsia-700/20 mt-4 flex flex-col gap-2">
           <h2 className="text-lg font-bold mb-2 text-fuchsia-200 flex items-center gap-2"><FaInfoCircle /> Novidades & Dicas</h2>
           <ul className="list-disc pl-6 text-fuchsia-100 text-base">
             <li>Explore os comandos avançados para automação do seu servidor.</li>
-            <li>Ative notificações para receber alertas de vazamentos em tempo real.</li>
+            <li>Veja o engajamento semanal e otimize suas ações.</li>
             <li>Personalize o painel nas configurações para uma experiência única.</li>
+            <li>Fique atento às novidades e atualizações exclusivas para assinantes.</li>
           </ul>
         </div>
         {/* Mensagem de analytics */}
