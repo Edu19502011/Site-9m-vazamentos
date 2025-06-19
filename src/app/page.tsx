@@ -5,7 +5,6 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/navigation";
 import { FaCogs, FaShieldAlt, FaUsers, FaQuoteLeft, FaDiscord, FaInstagram, FaGlobe } from "react-icons/fa";
-import { useSession } from "next-auth/react";
 
 function AnimatedParticlesBG() {
   // Gerar posições e tamanhos fixos para as partículas
@@ -55,7 +54,6 @@ function AnimatedParticlesBG() {
 export default function Home() {
   const { t, i18n } = useTranslation("common", { useSuspense: false });
   const router = useRouter();
-  const { data: session } = useSession();
 
   useEffect(() => {
     fetch("/api/visitas", { method: "POST" });
